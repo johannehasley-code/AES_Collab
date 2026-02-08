@@ -1,26 +1,394 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Variables CSS pour le thème */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 240 33% 99%;
+  --foreground: 222 47% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 16%;
+  --primary: 221 83% 53%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 262 83% 58%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 20% 98%;
+  --muted-foreground: 215 16% 47%;
+  --border: 214 32% 91%;
+  --radius: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 222 47% 8%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 12%;
+  --card-foreground: 210 40% 98%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 8%;
+  --secondary: 262 83% 68%;
+  --secondary-foreground: 222 47% 8%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --border: 217 33% 20%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Styles de base */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Navigation */
+  .aes-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+  }
+
+  .aes-nav-links {
+    display: flex;
+    gap: 2rem;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .aes-nav-links a:hover {
+    color: hsl(var(--primary));
+  }
+
+  .aes-nav-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+  }
+
+  /* Header avec dégradé */
+  .aes-header {
+    text-align: center;
+    padding: 4rem 1rem 5rem;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a7b 50%, #3da5d9 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aes-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(61, 165, 217, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(45, 90, 123, 0.3) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .aes-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .aes-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+
+  .aes-title-gradient {
+    background: linear-gradient(to right, #ffffff 0%, #5dd9f5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .aes-tagline {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Main container */
+  .aes-main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  /* Stats section */
+  .aes-stats-section {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .aes-stats-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+
+  .aes-stats-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: hsl(var(--primary));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Badge "12 documents disponibles" */
+  .aes-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Search section */
+  .aes-search-section {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .aes-search-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  .aes-search-input {
+    width: 100%;
+    padding: 1rem 1.5rem 1rem 3rem;
+    border: 2px solid hsl(var(--border));
+    border-radius: calc(var(--radius) + 0.25rem);
+    font-size: 1rem;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: all 0.2s ease;
+  }
+
+  .aes-search-input:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsla(var(--primary), 0.1);
+  }
+
+  .aes-search-input::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Grid layout */
+  .aes-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .aes-grid-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Stats grid */
+  .aes-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .aes-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .aes-stat-item {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .aes-stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .aes-stat-label {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .aes-stat-value {
+    color: hsl(var(--foreground));
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  /* Filters section */
+  .aes-filters-section {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid hsl(var(--border));
+    margin-bottom: 2rem;
+  }
+
+  .aes-filters-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  .aes-filter-option {
+    display: block;
+    padding: 0.5rem 0;
+    color: hsl(var(--muted-foreground));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .aes-filter-option:last-child {
+    border-bottom: none;
+  }
+
+  /* Course section */
+  .aes-course-section {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid hsl(var(--border));
+    margin-bottom: 2rem;
+  }
+
+  .aes-course-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+
+  .aes-course-subtitle {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Recent section */
+  .aes-recent-section {
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .aes-recent-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  .aes-recent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .aes-recent-item:last-child {
+    border-bottom: none;
+  }
+
+  .aes-recent-label {
+    color: hsl(var(--foreground));
+  }
+
+  .aes-recent-badge {
+    background-color: hsla(var(--primary), 0.1);
+    color: hsl(var(--primary));
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  /* Divider */
+  .aes-divider {
+    height: 1px;
+    background-color: hsl(var(--border));
+    margin: 1.5rem 0;
+  }
+}
+
+@layer utilities {
+  /* Utilities */
+  .text-gradient-primary {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+  }
+
+  .shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
 }
