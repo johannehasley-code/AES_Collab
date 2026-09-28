@@ -33,15 +33,17 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
-                >
+              const className = "flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200";
+              return item.href.startsWith("#") ? (
+                <a key={item.label} href={item.href} className={className}>
                   <Icon className="w-4 h-4" />
                   {item.label}
                 </a>
+              ) : (
+                <Link key={item.label} href={item.href} className={className}>
+                  <Icon className="w-4 h-4" />
+                  {item.label}
+                </Link>
               );
             })}
           </nav>
@@ -83,16 +85,17 @@ const Navbar = () => {
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                const className = "flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors";
+                return item.href.startsWith("#") ? (
+                  <a key={item.label} href={item.href} className={className} onClick={() => setIsMenuOpen(false)}>
                     <Icon className="w-5 h-5" />
                     {item.label}
                   </a>
+                ) : (
+                  <Link key={item.label} href={item.href} className={className} onClick={() => setIsMenuOpen(false)}>
+                    <Icon className="w-5 h-5" />
+                    {item.label}
+                  </Link>
                 );
               })}
 
