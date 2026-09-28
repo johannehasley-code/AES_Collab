@@ -49,10 +49,13 @@ const Navbar = () => {
           {/* Right Section */}
           <div className="flex items-center gap-3">
             {/* Library Badge */}
-            <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
+            <a
+              href="#documents"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/30 dark:hover:to-purple-900/30 transition-colors"
+            >
               <Library className="w-4 h-4" />
               <span className="text-sm font-semibold">Bibliothèque</span>
-            </div>
+            </a>
 
             {/* Admin Link */}
             <Link
@@ -94,13 +97,17 @@ const Navbar = () => {
               })}
 
               {/* Mobile Library Badge */}
-              <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 mt-4">
+              <a
+                href="#documents"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 mt-4"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <div>
                   <p className="font-semibold text-gray-900 dark:text-white">Bibliothèque</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Accédez à tous vos documents</p>
                 </div>
-              </div>
+              </a>
 
               {/* Mobile Admin Link */}
               <Link
