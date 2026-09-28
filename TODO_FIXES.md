@@ -1,9 +1,9 @@
 # Fix Lint Errors to Resolve Page Not Found
 
 ## Tasks
-- [ ] Fix unescaped apostrophe in aesconnect/Components/footer.tsx
-- [ ] Fix empty interface in aesconnect/components/ui/input.tsx
-- [ ] Remove unused imports in aesconnect/app/layout.tsx
-- [ ] Remove unused imports and fix unescaped apostrophe in aesconnect/app/page.tsx
-- [ ] Run lint again to verify fixes
-- [ ] Check dev server for successful compilation
+- [x] Fix unescaped apostrophe in aesconnect/Components/footer.tsx
+- [x] Fix empty interface in aesconnect/components/ui/input.tsx
+- [x] Remove unused imports in aesconnect/app/layout.tsx
+- [x] Remove unused imports and fix unescaped apostrophe in aesconnect/app/page.tsx
+- [x] Run lint again to verify fixes (`npx eslint .` : aucune erreur)
+- [ ] Check dev server for successful compilation (bloqué en environnement sans accès à Google Fonts ; à vérifier en local ou sur Vercel)
